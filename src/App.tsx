@@ -83,11 +83,11 @@ export default function App() {
             <circle cx="12" cy="12" r="2" fill="currentColor" />
           </svg>
           <span className="font-display text-sm font-bold tracking-widest text-white uppercase">
-            FF Anti-Cheat Scanner
+            Free Fire Hacker Scanner
           </span>
         </div>
         <div className="font-mono text-xs text-terminal-muted tracking-widest">
-          v2.1.0 · ingest-player
+          CAST · v1.0.0
         </div>
       </header>
 
@@ -100,7 +100,7 @@ export default function App() {
             Threat Scanner
           </h1>
           <p className="font-mono text-xs text-terminal-muted tracking-widest">
-            ── FREE FIRE INTEGRITY ANALYSIS SYSTEM ──
+            ── FREE FIRE CALCULATED ANOMALY SCORING TRACKER ──
           </p>
         </div>
 
@@ -236,10 +236,10 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-terminal-border px-6 py-3 flex items-center justify-between">
         <span className="font-mono text-xs text-terminal-muted tracking-widest">
-          SUPABASE EDGE · ingest-player
+          (c) 2026 Gustavo Slzar · tavo.slzr@hotmail.com
         </span>
         <span className="font-mono text-xs text-terminal-muted">
-          lmvgkpesjedmjbtmukqt.supabase.co
+          calculated-anomaly-scoring-tracker.pages.dev
         </span>
       </footer>
     </div>
