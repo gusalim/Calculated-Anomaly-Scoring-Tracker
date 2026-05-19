@@ -26,7 +26,7 @@ export const LogPanel: React.FC<LogPanelProps> = ({ logs, errors = [], isLoading
           <div className="w-2.5 h-2.5 rounded-full bg-terminal-safe" />
         </div>
         <span className="text-terminal-muted tracking-widest uppercase ml-2">
-          Scan Log — ingest-player
+          Scan Log — Calculated Anomaly Scoring Tracker
         </span>
         {isLoading && (
           <span className="ml-auto text-terminal-accent animate-pulse tracking-widest">
