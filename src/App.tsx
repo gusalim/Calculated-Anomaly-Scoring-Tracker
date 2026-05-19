@@ -19,6 +19,7 @@ export default function App() {
   const handleScan = async () => {
     const trimmedUid = uid.trim()
     if (!trimmedUid) return
+    if (trimmedUid.length < 9 || trimmedUid.length > 12) return
 
     setState('loading')
     setPlayer(null)
@@ -33,13 +34,13 @@ export default function App() {
 
       if (error) {
         setState('error')
-        setErrorMsg(error.message ?? 'Edge function invocation failed.')
+        setErrorMsg(error.message ?? 'Request failed.')
         return
       }
 
       if (!data) {
         setState('error')
-        setErrorMsg('No response received from the edge function.')
+        setErrorMsg('No response received from the request.')
         return
       }
 
@@ -62,7 +63,7 @@ export default function App() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleScan()
   }
-
+  
   const handleReset = () => {
     setState('idle')
     setPlayer(null)
@@ -125,9 +126,10 @@ export default function App() {
               <input
                 type="text"
                 value={uid}
-                onChange={e => setUid(e.target.value)}
+                onChange={e => setUid(e.target.value.replace(/\D/g, ""))}
                 onKeyDown={handleKeyDown}
                 placeholder="Enter Free Fire UID..."
+                maxLength={12}
                 disabled={state === 'loading'}
                 className="input-glow w-full bg-terminal-bg border border-terminal-border text-white font-mono text-sm pl-10 pr-4 py-3 placeholder-terminal-muted disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 autoComplete="off"
