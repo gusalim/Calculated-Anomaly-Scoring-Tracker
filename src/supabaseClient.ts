@@ -12,7 +12,11 @@ export interface PlayerResult {
   nickname: string
   verdict: Verdict
   hacker_score: number
-  flags_triggered: number
+  flags_triggered: number | string | unknown[]
+  flag_details?: unknown[]
+  flags?: unknown[]
+  triggered_flags?: unknown[]
+  flags_list?: unknown[]
   last_login_at: string | null
 }
 

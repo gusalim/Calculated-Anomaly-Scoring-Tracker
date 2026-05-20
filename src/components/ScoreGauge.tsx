@@ -4,42 +4,46 @@ import { Verdict } from '../supabaseClient'
 interface ScoreGaugeProps {
   score: number
   verdict: Verdict
+  labels: {
+    threatScore: string
+    verdicts: Record<Verdict, string>
+  }
 }
 
-const verdictConfig: Record<Verdict, { label: string; color: string; ringColor: string; bgGlow: string }> = {
+const verdictConfig: Record<Verdict, { color: string; ringColor: string; bgGlow: string; badgeShadow: string }> = {
   CLEAN: {
-    label: 'CLEAN',
-    color: '#00e676',
-    ringColor: '#00e676',
-    bgGlow: '0 0 60px #00e67620',
+    color: 'rgb(var(--terminal-safe))',
+    ringColor: 'rgb(var(--terminal-safe))',
+    bgGlow: '0 0 60px rgb(var(--terminal-safe) / 0.15)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-safe) / 0.2), inset 0 0 20px rgb(var(--terminal-safe) / 0.08)',
   },
   SUSPICIOUS: {
-    label: 'SUSPICIOUS',
-    color: '#ffab00',
-    ringColor: '#ffab00',
-    bgGlow: '0 0 60px #ffab0020',
+    color: 'rgb(var(--terminal-warn))',
+    ringColor: 'rgb(var(--terminal-warn))',
+    bgGlow: '0 0 60px rgb(var(--terminal-warn) / 0.15)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-warn) / 0.2), inset 0 0 20px rgb(var(--terminal-warn) / 0.08)',
   },
   LIKELY_HACKER: {
-    label: 'LIKELY HACKER',
     color: '#ff6d00',
     ringColor: '#ff6d00',
-    bgGlow: '0 0 60px #ff6d0030',
+    bgGlow: '0 0 60px rgb(255 109 0 / 0.2)',
+    badgeShadow: '0 0 20px rgb(255 109 0 / 0.2), inset 0 0 20px rgb(255 109 0 / 0.08)',
   },
   CONFIRMED_HACKER: {
-    label: 'CONFIRMED HACKER',
-    color: '#ff1744',
-    ringColor: '#ff1744',
-    bgGlow: '0 0 80px #ff174440',
+    color: 'rgb(var(--terminal-danger))',
+    ringColor: 'rgb(var(--terminal-danger))',
+    bgGlow: '0 0 80px rgb(var(--terminal-danger) / 0.25)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-danger) / 0.25), inset 0 0 20px rgb(var(--terminal-danger) / 0.1)',
   },
   UNKNOWN: {
-    label: 'UNKNOWN',
-    color: '#b0bec5',
-    ringColor: '#37474f',
+    color: 'rgb(var(--terminal-text))',
+    ringColor: 'rgb(var(--terminal-muted))',
     bgGlow: 'none',
+    badgeShadow: 'none',
   },
 }
 
-export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict }) => {
+export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict, labels }) => {
   const config = verdictConfig[verdict] ?? verdictConfig.UNKNOWN
   const clampedScore = Math.min(100, Math.max(0, score))
   const circumference = 2 * Math.PI * 45 // r=45
@@ -47,13 +51,16 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict }) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="relative w-48 h-48" style={{ filter: `drop-shadow(${config.bgGlow})` }}>
+      <div
+        className="relative w-48 h-48"
+        style={{ filter: config.bgGlow === 'none' ? 'none' : `drop-shadow(${config.bgGlow})` }}
+      >
         <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
           {/* Background ring */}
           <circle
             cx="50" cy="50" r="45"
             fill="none"
-            stroke="#1a2332"
+            stroke="rgb(var(--terminal-border))"
             strokeWidth="6"
           />
           {/* Score ring */}
@@ -81,7 +88,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict }) => {
               <line
                 key={i}
                 x1={x1} y1={y1} x2={x2} y2={y2}
-                stroke="#1a2332"
+                stroke="rgb(var(--terminal-border))"
                 strokeWidth="1"
               />
             )
@@ -96,7 +103,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict }) => {
             {clampedScore.toFixed(0)}
           </span>
           <span className="font-mono text-xs text-terminal-muted tracking-widest uppercase mt-1">
-            THREAT SCORE
+            {labels.threatScore}
           </span>
         </div>
       </div>
@@ -107,10 +114,10 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict }) => {
         style={{
           borderColor: config.color,
           color: config.color,
-          boxShadow: `0 0 20px ${config.color}30, inset 0 0 20px ${config.color}10`,
+          boxShadow: config.badgeShadow,
         }}
       >
-        {config.label}
+        {labels.verdicts[verdict] ?? labels.verdicts.UNKNOWN}
       </div>
     </div>
   )

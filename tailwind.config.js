@@ -13,15 +13,15 @@ export default {
       },
       colors: {
         terminal: {
-          bg: '#080c10',
-          panel: '#0d1117',
-          border: '#1a2332',
-          accent: '#00e5ff',
-          danger: '#ff1744',
-          warn: '#ffab00',
-          safe: '#00e676',
-          muted: '#37474f',
-          text: '#b0bec5',
+          bg: 'rgb(var(--terminal-bg) / <alpha-value>)',
+          panel: 'rgb(var(--terminal-panel) / <alpha-value>)',
+          border: 'rgb(var(--terminal-border) / <alpha-value>)',
+          accent: 'rgb(var(--terminal-accent) / <alpha-value>)',
+          danger: 'rgb(var(--terminal-danger) / <alpha-value>)',
+          warn: 'rgb(var(--terminal-warn) / <alpha-value>)',
+          safe: 'rgb(var(--terminal-safe) / <alpha-value>)',
+          muted: 'rgb(var(--terminal-muted) / <alpha-value>)',
+          text: 'rgb(var(--terminal-text) / <alpha-value>)',
         }
       },
       animation: {

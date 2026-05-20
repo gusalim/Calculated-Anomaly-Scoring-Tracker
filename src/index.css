@@ -2,14 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --terminal-bg: 8 12 16;
+  --terminal-panel: 13 17 23;
+  --terminal-border: 26 35 50;
+  --terminal-accent: 0 229 255;
+  --terminal-danger: 255 23 68;
+  --terminal-warn: 255 171 0;
+  --terminal-safe: 0 230 118;
+  --terminal-muted: 55 71 79;
+  --terminal-text: 176 190 197;
+}
+
+:root[data-theme='green'] {
+  --terminal-bg: 5 14 11;
+  --terminal-panel: 8 22 16;
+  --terminal-border: 24 72 54;
+  --terminal-accent: 48 255 145;
+  --terminal-muted: 79 112 98;
+  --terminal-text: 191 218 207;
+}
+
+:root[data-theme='silver'] {
+  --terminal-bg: 10 12 14;
+  --terminal-panel: 18 20 23;
+  --terminal-border: 73 80 87;
+  --terminal-accent: 203 213 225;
+  --terminal-muted: 107 114 128;
+  --terminal-text: 226 232 240;
+}
+
+:root[data-theme='blue'] {
+  --terminal-bg: 6 12 24;
+  --terminal-panel: 10 21 40;
+  --terminal-border: 30 64 115;
+  --terminal-accent: 96 165 250;
+  --terminal-muted: 91 128 170;
+  --terminal-text: 203 224 255;
+}
+
+:root[data-theme='purple'] {
+  --terminal-bg: 13 8 23;
+  --terminal-panel: 23 14 42;
+  --terminal-border: 71 46 124;
+  --terminal-accent: 192 132 252;
+  --terminal-muted: 124 103 156;
+  --terminal-text: 229 215 255;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #080c10;
-  color: #b0bec5;
+  background-color: rgb(var(--terminal-bg));
+  color: rgb(var(--terminal-text));
   font-family: 'Exo 2', sans-serif;
   overflow-x: hidden;
 }
@@ -26,8 +74,8 @@ body::before {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 229, 255, 0.015) 2px,
-    rgba(0, 229, 255, 0.015) 4px
+    rgb(var(--terminal-accent) / 0.015) 2px,
+    rgb(var(--terminal-accent) / 0.015) 4px
   );
   pointer-events: none;
   z-index: 9999;
@@ -38,22 +86,22 @@ body::before {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d1117;
+  background: rgb(var(--terminal-panel));
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a2332;
+  background: rgb(var(--terminal-border));
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00e5ff40;
+  background: rgb(var(--terminal-accent) / 0.35);
 }
 
 /* Glitch effect for title */
 @keyframes glitch {
-  0%, 100% { text-shadow: 2px 0 #ff1744, -2px 0 #00e5ff; }
-  25% { text-shadow: -2px 0 #ff1744, 2px 0 #00e5ff; }
-  50% { text-shadow: 2px 2px #ff1744, -2px -2px #00e5ff; }
-  75% { text-shadow: -2px 2px #ff1744, 2px -2px #00e5ff; }
+  0%, 100% { text-shadow: 2px 0 rgb(var(--terminal-danger)), -2px 0 rgb(var(--terminal-accent)); }
+  25% { text-shadow: -2px 0 rgb(var(--terminal-danger)), 2px 0 rgb(var(--terminal-accent)); }
+  50% { text-shadow: 2px 2px rgb(var(--terminal-danger)), -2px -2px rgb(var(--terminal-accent)); }
+  75% { text-shadow: -2px 2px rgb(var(--terminal-danger)), 2px -2px rgb(var(--terminal-accent)); }
 }
 
 .glitch {
@@ -62,7 +110,7 @@ body::before {
 
 /* Input glow on focus */
 .input-glow:focus {
-  box-shadow: 0 0 0 1px #00e5ff, 0 0 20px #00e5ff30;
+  box-shadow: 0 0 0 1px rgb(var(--terminal-accent)), 0 0 20px rgb(var(--terminal-accent) / 0.2);
   outline: none;
 }
 
@@ -79,7 +127,7 @@ body::before {
 .cursor::after {
   content: '█';
   animation: blink 1s step-end infinite;
-  color: #00e5ff;
+  color: rgb(var(--terminal-accent));
   font-size: 0.8em;
 }
 
@@ -90,6 +138,12 @@ body::before {
 
 /* Hex grid background */
 .hex-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52' viewBox='0 0 60 52'%3E%3Cpath fill='none' stroke='%231a2332' stroke-width='0.5' d='M30 2 L58 17 L58 35 L30 50 L2 35 L2 17 Z'/%3E%3C/svg%3E");
-  background-size: 60px 52px;
+  background-color: rgb(var(--terminal-bg));
+  background-image:
+    linear-gradient(30deg, rgb(var(--terminal-border) / 0.45) 12%, transparent 12.5%, transparent 87%, rgb(var(--terminal-border) / 0.45) 87.5%, rgb(var(--terminal-border) / 0.45)),
+    linear-gradient(150deg, rgb(var(--terminal-border) / 0.45) 12%, transparent 12.5%, transparent 87%, rgb(var(--terminal-border) / 0.45) 87.5%, rgb(var(--terminal-border) / 0.45)),
+    linear-gradient(30deg, rgb(var(--terminal-border) / 0.45) 12%, transparent 12.5%, transparent 87%, rgb(var(--terminal-border) / 0.45) 87.5%, rgb(var(--terminal-border) / 0.45)),
+    linear-gradient(150deg, rgb(var(--terminal-border) / 0.45) 12%, transparent 12.5%, transparent 87%, rgb(var(--terminal-border) / 0.45) 87.5%, rgb(var(--terminal-border) / 0.45));
+  background-position: 0 0, 0 0, 30px 52px, 30px 52px;
+  background-size: 60px 104px;
 }
