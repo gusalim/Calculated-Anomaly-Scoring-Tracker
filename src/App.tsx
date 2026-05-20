@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { supabase, ScanResponse, PlayerResult } from './supabaseClient'
+import { scanPlayer, PlayerResult } from './apiClient'
 import { PlayerCard } from './components/PlayerCard'
 
 type ScanState = 'idle' | 'loading' | 'success' | 'error'
@@ -327,15 +327,7 @@ export default function App() {
     setErrorMsg('')
 
     try {
-      const { data, error } = await supabase.functions.invoke<ScanResponse>('ingest-player', {
-        body: { uid: trimmedUid, server },
-      })
-
-      if (error) {
-        setState('error')
-        setErrorMsg(error.message ?? t.requestFailed)
-        return
-      }
+      const data = await scanPlayer(trimmedUid, server)
 
       if (!data) {
         setState('error')
@@ -345,7 +337,10 @@ export default function App() {
 
       setErrors(data.errors ?? [])
 
-      if (data.player) {
+      if (!data.success) {
+        setState('error')
+        setErrorMsg(data.error ?? data.message ?? t.requestFailed)
+      } else if (data.player) {
         setPlayer(data.player)
         setState('success')
       } else {

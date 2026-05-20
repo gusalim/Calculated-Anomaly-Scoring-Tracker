@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlayerResult } from '../supabaseClient'
+import { PlayerResult } from '../apiClient'
 import { ScoreGauge } from './ScoreGauge'
 
 interface PlayerCardProps {
@@ -46,18 +46,7 @@ const splitFlagString = (value: string) => {
 }
 
 const getFlagList = (player: PlayerResult) => {
-  const sources = [
-    player.flags_triggered,
-    player.flag_details,
-    player.flags,
-    player.triggered_flags,
-    player.flags_list,
-  ]
-  const flags = sources.flatMap(source => {
-    if (Array.isArray(source)) return source
-    if (typeof source === 'string') return splitFlagString(source)
-    return []
-  })
+  const flags = player.flags_triggered.flatMap(splitFlagString)
 
   return Array.from(new Set(flags.map(formatFlag).filter(Boolean)))
 }
@@ -79,9 +68,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
     ? new Date(player.last_login_at).toLocaleString()
     : copy.notAvailable
   const flags = getFlagList(player)
-  const flagCount = typeof player.flags_triggered === 'number'
-    ? player.flags_triggered
-    : flags.length
+  const flagCount = flags.length
   const scoreAccent = player.hacker_score >= 70
     ? 'rgb(var(--terminal-danger))'
     : player.hacker_score >= 40

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Verdict } from '../supabaseClient'
+import { Verdict } from '../apiClient'
 
 interface ScoreGaugeProps {
   score: number
