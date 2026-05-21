@@ -307,7 +307,7 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState('')
 
   const t = translations[language]
-  const isUidValid = uid.trim().length >= 9 && uid.trim().length <= 12
+  const isUidValid = uid.trim().length >= 8 && uid.trim().length <= 12
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -318,7 +318,7 @@ export default function App() {
     const trimmedUid = uid.trim()
     if (state === 'loading') return
     if (!trimmedUid) return
-    if (trimmedUid.length < 9 || trimmedUid.length > 12) return
+    if (trimmedUid.length < 8 || trimmedUid.length > 12) return
 
     setUid('')
     setState('loading')
