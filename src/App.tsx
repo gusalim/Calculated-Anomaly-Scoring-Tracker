@@ -39,7 +39,6 @@ type Translation = {
     playerProfile: string
     uid: string
     hackerScore: string
-    flagsTriggered: string
     lastSeen: string
     notAvailable: string
     threatScore: string
@@ -76,7 +75,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Perfil del jugador',
       uid: 'UID',
       hackerScore: 'Puntuación hacker',
-      flagsTriggered: 'Flags activadas',
       lastSeen: 'Última conexión',
       notAvailable: 'N/D',
       threatScore: 'Puntuación de riesgo',
@@ -117,7 +115,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Player Profile',
       uid: 'UID',
       hackerScore: 'Hacker Score',
-      flagsTriggered: 'Flags Triggered',
       lastSeen: 'Last Seen',
       notAvailable: 'N/A',
       threatScore: 'Threat Score',
@@ -158,7 +155,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Perfil do jogador',
       uid: 'UID',
       hackerScore: 'Pontuação hacker',
-      flagsTriggered: 'Flags acionadas',
       lastSeen: 'Visto por último',
       notAvailable: 'N/D',
       threatScore: 'Pontuação de risco',
@@ -199,7 +195,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Profil du joueur',
       uid: 'UID',
       hackerScore: 'Score hacker',
-      flagsTriggered: 'Flags déclenchés',
       lastSeen: 'Dernière activité',
       notAvailable: 'N/D',
       threatScore: 'Score de risque',
@@ -240,7 +235,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Spielerprofil',
       uid: 'UID',
       hackerScore: 'Hacker-Score',
-      flagsTriggered: 'Ausgelöste Flags',
       lastSeen: 'Zuletzt gesehen',
       notAvailable: 'N/V',
       threatScore: 'Risikowert',
@@ -281,7 +275,6 @@ const translations: Record<Language, Translation> = {
       playerProfile: 'Profilo giocatore',
       uid: 'UID',
       hackerScore: 'Punteggio hacker',
-      flagsTriggered: 'Flag attivate',
       lastSeen: 'Ultimo accesso',
       notAvailable: 'N/D',
       threatScore: 'Punteggio rischio',
@@ -433,6 +426,13 @@ export default function App() {
           </p>
         </div>
 
+        {/* Results */}
+        {player && (
+          <div className="w-full">
+            <PlayerCard player={player} copy={t.playerCard} />
+          </div>
+        )}
+
         {/* Input panel */}
         <div className="w-full border border-terminal-border bg-terminal-panel p-6 space-y-4 animate-slide-up">
           <div className="flex items-center gap-2 mb-4">
@@ -524,13 +524,6 @@ export default function App() {
               <span className="text-lg">⚠</span>
               <span className="tracking-wide">{errorMsg}</span>
             </div>
-          </div>
-        )}
-
-        {/* Results */}
-        {player && (
-          <div className="w-full">
-            <PlayerCard player={player} copy={t.playerCard} />
           </div>
         )}
 

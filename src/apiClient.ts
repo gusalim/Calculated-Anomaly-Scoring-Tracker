@@ -7,7 +7,6 @@ export interface PlayerResult {
   nickname: string
   verdict: Verdict
   hacker_score: number
-  flags_triggered: string[]
   last_login_at: string | null
 }
 

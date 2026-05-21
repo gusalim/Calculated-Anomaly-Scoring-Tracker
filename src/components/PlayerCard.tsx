@@ -8,47 +8,11 @@ interface PlayerCardProps {
     playerProfile: string
     uid: string
     hackerScore: string
-    flagsTriggered: string
     lastSeen: string
     notAvailable: string
     threatScore: string
     verdicts: Record<PlayerResult['verdict'], string>
   }
-}
-
-const formatFlag = (flag: unknown): string => {
-  if (typeof flag === 'string') return flag.trim()
-  if (typeof flag === 'number' || typeof flag === 'boolean') return String(flag)
-  if (flag && typeof flag === 'object') {
-    const record = flag as Record<string, unknown>
-    const preferredKeys = ['label', 'name', 'code', 'reason', 'description', 'flag']
-
-    for (const key of preferredKeys) {
-      const value = record[key]
-      if (typeof value === 'string' && value.trim()) return value.trim()
-      if (typeof value === 'number' || typeof value === 'boolean') return String(value)
-    }
-
-    try {
-      return JSON.stringify(flag)
-    } catch {
-      return ''
-    }
-  }
-
-  return ''
-}
-
-const splitFlagString = (value: string) => {
-  const trimmed = value.trim()
-  if (!trimmed) return []
-  return trimmed.split(/[,;\n]+/).map(item => item.trim()).filter(Boolean)
-}
-
-const getFlagList = (player: PlayerResult) => {
-  const flags = player.flags_triggered.flatMap(splitFlagString)
-
-  return Array.from(new Set(flags.map(formatFlag).filter(Boolean)))
 }
 
 const StatBox: React.FC<{ label: string; value: React.ReactNode; accent?: string }> = ({ label, value, accent }) => (
@@ -67,16 +31,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
   const loginDate = player.last_login_at
     ? new Date(player.last_login_at).toLocaleString()
     : copy.notAvailable
-  const flags = getFlagList(player)
-  const flagCount = flags.length
   const scoreAccent = player.hacker_score >= 70
     ? 'rgb(var(--terminal-danger))'
     : player.hacker_score >= 40
-      ? 'rgb(var(--terminal-warn))'
-      : 'rgb(var(--terminal-safe))'
-  const flagAccent = flagCount > 5
-    ? 'rgb(var(--terminal-danger))'
-    : flagCount > 2
       ? 'rgb(var(--terminal-warn))'
       : 'rgb(var(--terminal-safe))'
 
@@ -109,40 +66,17 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <StatBox
           label={copy.hackerScore}
           value={`${player.hacker_score.toFixed(1)} / 100`}
           accent={scoreAccent}
         />
         <StatBox
-          label={copy.flagsTriggered}
-          value={flagCount}
-          accent={flagAccent}
-        />
-        <StatBox
           label={copy.lastSeen}
           value={loginDate}
         />
       </div>
-
-      {flags.length > 0 && (
-        <div className="border border-terminal-border bg-terminal-bg p-3">
-          <div className="font-mono text-xs text-terminal-muted tracking-widest uppercase">
-            {copy.flagsTriggered}
-          </div>
-          <ul className="mt-3 flex flex-col gap-2">
-            {flags.map((flag, index) => (
-              <li key={`${flag}-${index}`} className="flex min-w-0 items-start gap-2 font-mono text-xs text-terminal-text">
-                <span className="mt-1.5 h-1.5 w-1.5 flex-none bg-terminal-accent" />
-                <span className="min-w-0 flex-1 whitespace-normal break-words leading-relaxed">
-                  {flag}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   )
 }
