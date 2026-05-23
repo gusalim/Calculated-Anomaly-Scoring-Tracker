@@ -6,7 +6,7 @@ type ScanState = 'idle' | 'loading' | 'success' | 'error'
 type ThemeId = 'terminal' | 'green' | 'silver' | 'blue' | 'purple'
 type Language = 'es' | 'en' | 'pt' | 'fr' | 'de' | 'it'
 
-const SERVERS = ['US', 'IND', 'BR', 'SAC', 'NA', 'EU', 'ME', 'SEA', 'SG']
+const REGIONS = ['US', 'IND', 'BR', 'SAC', 'NA', 'EU', 'ME', 'SEA', 'SG']
 const THEMES: ThemeId[] = ['terminal', 'green', 'silver', 'blue', 'purple']
 const LANGUAGES: Array<{ id: Language; label: string }> = [
   { id: 'es', label: 'Español' },
@@ -26,7 +26,7 @@ type Translation = {
   playerIdentification: string
   playerUid: string
   uidPlaceholder: string
-  regionServer: string
+  region: string
   initiateScan: string
   scanning: string
   requestFailed: string
@@ -56,7 +56,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Identificación del jugador',
     playerUid: 'UID del jugador',
     uidPlaceholder: 'Ingresa UID de Free Fire...',
-    regionServer: 'Servidor regional',
+    region: 'Región',
     initiateScan: 'Iniciar escaneo',
     scanning: 'Escaneando...',
     requestFailed: 'La solicitud falló.',
@@ -96,7 +96,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Player Identification',
     playerUid: 'Player UID',
     uidPlaceholder: 'Enter Free Fire UID...',
-    regionServer: 'Region Server',
+    region: 'Region',
     initiateScan: 'Initiate Scan',
     scanning: 'Scanning...',
     requestFailed: 'Request failed.',
@@ -136,7 +136,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Identificação do jogador',
     playerUid: 'UID do jogador',
     uidPlaceholder: 'Digite o UID do Free Fire...',
-    regionServer: 'Servidor regional',
+    region: 'Região',
     initiateScan: 'Iniciar scanner',
     scanning: 'Escaneando...',
     requestFailed: 'A solicitação falhou.',
@@ -176,7 +176,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Identification du joueur',
     playerUid: 'UID du joueur',
     uidPlaceholder: 'Entrez l’UID Free Fire...',
-    regionServer: 'Serveur régional',
+    region: 'Région',
     initiateScan: 'Lancer le scan',
     scanning: 'Analyse...',
     requestFailed: 'La requête a échoué.',
@@ -216,7 +216,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Spieleridentifikation',
     playerUid: 'Spieler-UID',
     uidPlaceholder: 'Free Fire UID eingeben...',
-    regionServer: 'Regionaler Server',
+    region: 'Region',
     initiateScan: 'Scan starten',
     scanning: 'Scannen...',
     requestFailed: 'Anfrage fehlgeschlagen.',
@@ -256,7 +256,7 @@ const translations: Record<Language, Translation> = {
     playerIdentification: 'Identificazione giocatore',
     playerUid: 'UID giocatore',
     uidPlaceholder: 'Inserisci UID Free Fire...',
-    regionServer: 'Server regionale',
+    region: 'Regione',
     initiateScan: 'Avvia scansione',
     scanning: 'Scansione...',
     requestFailed: 'Richiesta non riuscita.',
@@ -291,7 +291,7 @@ const translations: Record<Language, Translation> = {
 
 export default function App() {
   const [uid, setUid] = useState('')
-  const [server, setServer] = useState('US')
+  const [region, setRegion] = useState('US')
   const [theme, setTheme] = useState<ThemeId>('terminal')
   const [language, setLanguage] = useState<Language>('es')
   const [state, setState] = useState<ScanState>('idle')
@@ -320,7 +320,7 @@ export default function App() {
     setErrorMsg('')
 
     try {
-      const data = await scanPlayer(trimmedUid, server)
+      const data = await scanPlayer(trimmedUid, region)
 
       if (!data) {
         setState('error')
@@ -466,20 +466,20 @@ export default function App() {
             </div>
           </div>
 
-          {/* Server selector */}
+          {/* Region selector */}
           <div className="space-y-1.5">
             <label className="font-mono text-xs text-terminal-muted tracking-widest uppercase block">
-              {t.regionServer}
+              {t.region}
             </label>
             <div className="flex flex-wrap gap-2">
-              {SERVERS.map(s => (
+              {REGIONS.map(s => (
                 <button
                   key={s}
-                  onClick={() => setServer(s)}
+                  onClick={() => setRegion(s)}
                   disabled={state === 'loading'}
                   className={`
                     px-3 py-1.5 font-mono text-xs tracking-widest uppercase border transition-all duration-150 disabled:opacity-50
-                    ${server === s
+                    ${region === s
                       ? 'border-terminal-accent text-terminal-accent bg-terminal-accent/10'
                       : 'border-terminal-border text-terminal-muted hover:border-terminal-accent/50 hover:text-terminal-text'
                     }

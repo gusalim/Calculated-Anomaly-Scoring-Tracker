@@ -18,8 +18,8 @@ export interface ScanResponse {
   errors?: string[]
 }
 
-export const scanPlayer = async (uid: string, server = 'US'): Promise<ScanResponse> => {
-  const body = server === 'US' ? { uid } : { uid, server }
+export const scanPlayer = async (uid: string, region = 'US'): Promise<ScanResponse> => {
+  const body = region === 'US' ? { uid } : { uid, region }
 
   const response = await fetch(WORKER_URL, {
     method: 'POST',
