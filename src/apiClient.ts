@@ -1,6 +1,6 @@
 const WORKER_URL = 'https://supabase-api-call.gustavosalazarlima.workers.dev/'
 
-export type Verdict = 'CLEAN' | 'LEGIT' | 'SUSPICIOUS' | 'LIKELY_HACKER' | 'CONFIRMED_HACKER' | 'UNKNOWN'
+export type Verdict = 'CLEAN' | 'LEGIT' | 'POSSIBLY_SUSPICIOUS' | 'SUSPICIOUS' | 'LIKELY_HACKER' | 'CONFIRMED_HACKER' | 'UNKNOWN'
 
 export interface PlayerResult {
   uid: number
