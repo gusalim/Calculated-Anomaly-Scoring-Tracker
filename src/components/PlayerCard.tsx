@@ -7,7 +7,7 @@ interface PlayerCardProps {
   copy: {
     playerProfile: string
     uid: string
-    hackerScore: string
+    probabilityScore: string
     lastSeen: string
     notAvailable: string
     threatScore: string
@@ -31,51 +31,64 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
   const loginDate = player.last_login_at
     ? new Date(player.last_login_at).toLocaleString()
     : copy.notAvailable
-  const scoreAccent = player.hacker_score >= 70
-    ? 'rgb(var(--terminal-danger))'
-    : player.hacker_score >= 40
-      ? 'rgb(var(--terminal-warn))'
-      : 'rgb(var(--terminal-safe))'
+  const scoreAccent = 'rgb(var(--terminal-accent))'
+  const telemetryRows = [
+    JSON.stringify({ event: 'snapshot', uid: player.uid, probability: player.hacker_score.toFixed(1) }),
+    JSON.stringify({ event: 'region_vector', verdict: player.verdict, source: 'cast_worker' }),
+    JSON.stringify({ event: 'ledger_commit', last_seen: player.last_login_at ?? 'unavailable' }),
+    JSON.stringify({ event: 'review_state', anomaly_class: player.verdict }),
+  ]
 
   return (
     <div
-      className="animate-slide-up border border-terminal-border bg-terminal-panel p-6 flex flex-col gap-6"
+      className="relative overflow-hidden animate-slide-up border border-terminal-border bg-terminal-panel p-6"
       style={{ animationDelay: '0.1s', opacity: 0 }}
     >
-      {/* Header */}
-      <div className="flex items-center gap-3 border-b border-terminal-border pb-4">
-        <div className="w-2 h-8 bg-terminal-accent" />
-        <div>
-          <div className="font-mono text-xs text-terminal-muted tracking-widest uppercase">{copy.playerProfile}</div>
-          <div className="font-display text-xl font-bold text-white tracking-wider">
-            {player.nickname}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.055]" aria-hidden="true">
+        <div className="telemetry-stream font-mono text-[10px] leading-5 text-terminal-accent">
+          {[...telemetryRows, ...telemetryRows, ...telemetryRows, ...telemetryRows].map((row, index) => (
+            <div key={`${row}-${index}`} className="whitespace-nowrap">
+              {row}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 flex flex-col gap-6">
+        <div className="flex flex-col gap-3 border-b border-terminal-border pb-4 sm:flex-row sm:items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-8 bg-terminal-accent" />
+            <div>
+              <div className="font-mono text-xs text-terminal-muted tracking-widest uppercase">{copy.playerProfile}</div>
+              <div className="font-display text-xl font-bold text-white tracking-wider">
+                {player.nickname}
+              </div>
+            </div>
+          </div>
+          <div className="font-mono text-xs text-terminal-muted sm:ml-auto">
+            {copy.uid}: <span className="text-terminal-accent">{player.uid}</span>
           </div>
         </div>
-        <div className="ml-auto font-mono text-xs text-terminal-muted">
-          {copy.uid}: <span className="text-terminal-accent">{player.uid}</span>
+
+        <div className="flex justify-center py-4">
+          <ScoreGauge
+            score={player.hacker_score}
+            verdict={player.verdict}
+            labels={{ threatScore: copy.threatScore, verdicts: copy.verdicts }}
+          />
         </div>
-      </div>
 
-      {/* Score gauge center */}
-      <div className="flex justify-center py-4">
-        <ScoreGauge
-          score={player.hacker_score}
-          verdict={player.verdict}
-          labels={{ threatScore: copy.threatScore, verdicts: copy.verdicts }}
-        />
-      </div>
-
-      {/* Stats grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <StatBox
-          label={copy.hackerScore}
-          value={`${player.hacker_score.toFixed(1)} / 100`}
-          accent={scoreAccent}
-        />
-        <StatBox
-          label={copy.lastSeen}
-          value={loginDate}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <StatBox
+            label={copy.probabilityScore}
+            value={`${player.hacker_score.toFixed(1)} / 100`}
+            accent={scoreAccent}
+          />
+          <StatBox
+            label={copy.lastSeen}
+            value={loginDate}
+          />
+        </div>
       </div>
     </div>
   )

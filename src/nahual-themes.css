@@ -1,0 +1,84 @@
+:root {
+  --terminal-bg: 5 14 11;
+  --terminal-panel: 8 22 16;
+  --terminal-border: 24 72 54;
+  --terminal-accent: 48 255 145;
+  --terminal-danger: 255 23 68;
+  --terminal-warn: 255 171 0;
+  --terminal-safe: 0 230 118;
+  --terminal-muted: 79 112 98;
+  --terminal-text: 191 218 207;
+}
+
+:root[data-theme='obsidian'] {
+  --terminal-bg: 8 12 16;
+  --terminal-panel: 13 17 23;
+  --terminal-border: 26 35 50;
+  --terminal-accent: 0 229 255;
+  --terminal-muted: 55 71 79;
+  --terminal-text: 176 190 197;
+}
+
+:root[data-theme='green'] {
+  --terminal-bg: 5 14 11;
+  --terminal-panel: 8 22 16;
+  --terminal-border: 24 72 54;
+  --terminal-accent: 48 255 145;
+  --terminal-muted: 79 112 98;
+  --terminal-text: 191 218 207;
+}
+
+:root[data-theme='terminal'] {
+  --terminal-bg: 2 8 6;
+  --terminal-panel: 5 15 11;
+  --terminal-border: 38 92 66;
+  --terminal-accent: 121 255 184;
+  --terminal-muted: 65 108 88;
+  --terminal-text: 205 232 221;
+}
+
+:root[data-theme='silver'] {
+  --terminal-bg: 10 12 14;
+  --terminal-panel: 18 20 23;
+  --terminal-border: 73 80 87;
+  --terminal-accent: 203 213 225;
+  --terminal-muted: 107 114 128;
+  --terminal-text: 226 232 240;
+}
+
+:root[data-theme='blue'] {
+  --terminal-bg: 6 12 24;
+  --terminal-panel: 10 21 40;
+  --terminal-border: 30 64 115;
+  --terminal-accent: 96 165 250;
+  --terminal-muted: 91 128 170;
+  --terminal-text: 203 224 255;
+}
+
+:root[data-theme='purple'] {
+  --terminal-bg: 13 8 23;
+  --terminal-panel: 23 14 42;
+  --terminal-border: 71 46 124;
+  --terminal-accent: 192 132 252;
+  --terminal-muted: 124 103 156;
+  --terminal-text: 229 215 255;
+}
+
+:root[data-anomaly='nominal'] {
+  --terminal-accent: 56 189 248;
+  --terminal-safe: 56 189 248;
+  --terminal-border: 30 64 115;
+}
+
+:root[data-anomaly='drift'] {
+  --terminal-accent: 251 191 36;
+  --terminal-warn: 251 191 36;
+  --terminal-border: 104 76 17;
+}
+
+:root[data-anomaly='anomaly'] {
+  --terminal-accent: 239 68 68;
+  --terminal-danger: 239 68 68;
+  --terminal-border: 127 29 29;
+  --terminal-panel: 26 16 16;
+}

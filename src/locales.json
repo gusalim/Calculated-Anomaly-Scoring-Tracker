@@ -1,0 +1,132 @@
+{
+  "es": {
+    "brand_name": "NAHUAL",
+    "tagline": "Telemetría y Análisis de Anomalías",
+    "dashboard_title": "Visor de Estado de Eventos",
+    "brand_profile": "NAHUAL fusiona la figura mesoamericana y mexicana del nahual, asociada con transformación y vigilancia entre planos, con una estética dura de ciberseguridad, ciencia de datos y operación táctica.",
+    "metrics": {
+      "probability_score": "Probabilidad Bayesiana",
+      "snapshot_drift": "Desviación de Instantánea",
+      "event_ledger": "Registro Inmutable"
+    },
+    "status": {
+      "nominal": "Parámetros Nominales",
+      "drift": "Revisión de Desviación",
+      "anomaly": "Anomalía Estadística"
+    },
+    "theme_label": "Tema",
+    "language_label": "Idioma",
+    "version_label": "CAST · v1.2.0",
+    "nav": {
+      "scanner": "Escáner",
+      "about": "Acerca",
+      "methodology": "Metodología",
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "contact": "Contacto"
+    },
+    "scanner": {
+      "player_identification": "Entrada de evento de jugador",
+      "player_uid": "UID del jugador",
+      "uid_placeholder": "Ingresa UID de Free Fire...",
+      "region": "Región",
+      "initiate_scan": "Iniciar análisis",
+      "scanning": "Analizando...",
+      "request_failed": "La solicitud falló.",
+      "no_response": "No se recibió respuesta de la solicitud.",
+      "no_player": "El análisis terminó, pero no devolvió datos del jugador.",
+      "unexpected": "Ocurrió un error inesperado.",
+      "partial_errors_title": "Alertas parciales durante el análisis",
+      "ready_state": "Sistema listo",
+      "supporting_copy": "Sistema bilingüe de telemetría anti-cheat para revisar UID, detectar deriva conductual y clasificar severidad de anomalías sin promover trampas ni acceso no autorizado."
+    },
+    "themes": {
+      "green": "Verde",
+      "terminal": "Terminal",
+      "obsidian": "Obsidian",
+      "silver": "Gris plata",
+      "blue": "Azul",
+      "purple": "Púrpura"
+    },
+    "player_card": {
+      "player_profile": "Perfil de telemetría",
+      "uid": "UID",
+      "probability_score": "Probabilidad Bayesiana",
+      "last_seen": "Último evento",
+      "not_available": "N/D",
+      "threat_score": "Riesgo",
+      "verdicts": {
+        "CLEAN": "PARÁMETROS NOMINALES",
+        "SUSPICIOUS": "REVISIÓN DE DESVIACIÓN",
+        "LIKELY_HACKER": "ANOMALÍA PROBABLE",
+        "CONFIRMED_HACKER": "ANOMALÍA ESTADÍSTICA",
+        "UNKNOWN": "ESTADO DESCONOCIDO"
+      }
+    }
+  },
+  "en": {
+    "brand_name": "NAHUAL",
+    "tagline": "Telemetry and Anomaly Analysis",
+    "dashboard_title": "Event State Viewer",
+    "brand_profile": "NAHUAL merges the Mesoamerican and Mexican figure of the Nahual, associated with transformation and watchfulness between states, with a hard-edged cybersecurity, data-science, and tactical operations aesthetic.",
+    "metrics": {
+      "probability_score": "Bayesian Probability",
+      "snapshot_drift": "Snapshot Drift",
+      "event_ledger": "Immutable Ledger"
+    },
+    "status": {
+      "nominal": "Nominal Parameters",
+      "drift": "Drift Review",
+      "anomaly": "Statistical Anomaly"
+    },
+    "theme_label": "Theme",
+    "language_label": "Language",
+    "version_label": "CAST · v1.2.0",
+    "nav": {
+      "scanner": "Scanner",
+      "about": "About",
+      "methodology": "Methodology",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    },
+    "scanner": {
+      "player_identification": "Player event input",
+      "player_uid": "Player UID",
+      "uid_placeholder": "Enter Free Fire UID...",
+      "region": "Region",
+      "initiate_scan": "Run analysis",
+      "scanning": "Analyzing...",
+      "request_failed": "Request failed.",
+      "no_response": "No response received from the request.",
+      "no_player": "Analysis completed but no player data was returned.",
+      "unexpected": "An unexpected error occurred.",
+      "partial_errors_title": "Partial alerts during analysis",
+      "ready_state": "System ready",
+      "supporting_copy": "A bilingual anti-cheat telemetry system for reviewing UIDs, detecting behavior drift, and classifying anomaly severity without promoting cheating or unauthorized access."
+    },
+    "themes": {
+      "green": "Green",
+      "terminal": "Terminal",
+      "obsidian": "Obsidian",
+      "silver": "Silver gray",
+      "blue": "Blue",
+      "purple": "Purple"
+    },
+    "player_card": {
+      "player_profile": "Telemetry profile",
+      "uid": "UID",
+      "probability_score": "Bayesian Probability",
+      "last_seen": "Last event",
+      "not_available": "N/A",
+      "threat_score": "Risk",
+      "verdicts": {
+        "CLEAN": "NOMINAL PARAMETERS",
+        "SUSPICIOUS": "DRIFT REVIEW",
+        "LIKELY_HACKER": "PROBABLE ANOMALY",
+        "CONFIRMED_HACKER": "STATISTICAL ANOMALY",
+        "UNKNOWN": "UNKNOWN STATE"
+      }
+    }
+  }
+}

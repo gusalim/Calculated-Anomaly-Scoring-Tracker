@@ -2,54 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --terminal-bg: 8 12 16;
-  --terminal-panel: 13 17 23;
-  --terminal-border: 26 35 50;
-  --terminal-accent: 0 229 255;
-  --terminal-danger: 255 23 68;
-  --terminal-warn: 255 171 0;
-  --terminal-safe: 0 230 118;
-  --terminal-muted: 55 71 79;
-  --terminal-text: 176 190 197;
-}
-
-:root[data-theme='green'] {
-  --terminal-bg: 5 14 11;
-  --terminal-panel: 8 22 16;
-  --terminal-border: 24 72 54;
-  --terminal-accent: 48 255 145;
-  --terminal-muted: 79 112 98;
-  --terminal-text: 191 218 207;
-}
-
-:root[data-theme='silver'] {
-  --terminal-bg: 10 12 14;
-  --terminal-panel: 18 20 23;
-  --terminal-border: 73 80 87;
-  --terminal-accent: 203 213 225;
-  --terminal-muted: 107 114 128;
-  --terminal-text: 226 232 240;
-}
-
-:root[data-theme='blue'] {
-  --terminal-bg: 6 12 24;
-  --terminal-panel: 10 21 40;
-  --terminal-border: 30 64 115;
-  --terminal-accent: 96 165 250;
-  --terminal-muted: 91 128 170;
-  --terminal-text: 203 224 255;
-}
-
-:root[data-theme='purple'] {
-  --terminal-bg: 13 8 23;
-  --terminal-panel: 23 14 42;
-  --terminal-border: 71 46 124;
-  --terminal-accent: 192 132 252;
-  --terminal-muted: 124 103 156;
-  --terminal-text: 229 215 255;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -58,8 +10,20 @@ body {
   margin: 0;
   background-color: rgb(var(--terminal-bg));
   color: rgb(var(--terminal-text));
-  font-family: 'Exo 2', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+body,
+.hex-bg,
+input,
+select,
+button {
+  transition:
+    background-color 700ms ease,
+    border-color 700ms ease,
+    color 700ms ease,
+    box-shadow 700ms ease;
 }
 
 /* Scanline overlay */
@@ -134,6 +98,22 @@ body::before {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@keyframes telemetry-scroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.telemetry-stream {
+  animation: telemetry-scroll 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch,
+  .telemetry-stream {
+    animation: none;
+  }
 }
 
 /* Hex grid background */

@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"Share Tech Mono"', 'monospace'],
+        mono: ['"JetBrains Mono"', 'monospace'],
         display: ['"Orbitron"', 'sans-serif'],
-        body: ['"Exo 2"', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       colors: {
         terminal: {

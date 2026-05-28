@@ -12,28 +12,28 @@ interface ScoreGaugeProps {
 
 const verdictConfig: Record<Verdict, { color: string; ringColor: string; bgGlow: string; badgeShadow: string }> = {
   CLEAN: {
-    color: 'rgb(var(--terminal-safe))',
-    ringColor: 'rgb(var(--terminal-safe))',
-    bgGlow: '0 0 60px rgb(var(--terminal-safe) / 0.15)',
-    badgeShadow: '0 0 20px rgb(var(--terminal-safe) / 0.2), inset 0 0 20px rgb(var(--terminal-safe) / 0.08)',
+    color: 'rgb(var(--terminal-accent))',
+    ringColor: 'rgb(var(--terminal-accent))',
+    bgGlow: '0 0 60px rgb(var(--terminal-accent) / 0.15)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-accent) / 0.2), inset 0 0 20px rgb(var(--terminal-accent) / 0.08)',
   },
   SUSPICIOUS: {
-    color: 'rgb(var(--terminal-warn))',
-    ringColor: 'rgb(var(--terminal-warn))',
-    bgGlow: '0 0 60px rgb(var(--terminal-warn) / 0.15)',
-    badgeShadow: '0 0 20px rgb(var(--terminal-warn) / 0.2), inset 0 0 20px rgb(var(--terminal-warn) / 0.08)',
+    color: 'rgb(var(--terminal-accent))',
+    ringColor: 'rgb(var(--terminal-accent))',
+    bgGlow: '0 0 60px rgb(var(--terminal-accent) / 0.15)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-accent) / 0.2), inset 0 0 20px rgb(var(--terminal-accent) / 0.08)',
   },
   LIKELY_HACKER: {
-    color: '#ff6d00',
-    ringColor: '#ff6d00',
-    bgGlow: '0 0 60px rgb(255 109 0 / 0.2)',
-    badgeShadow: '0 0 20px rgb(255 109 0 / 0.2), inset 0 0 20px rgb(255 109 0 / 0.08)',
+    color: 'rgb(var(--terminal-accent))',
+    ringColor: 'rgb(var(--terminal-accent))',
+    bgGlow: '0 0 60px rgb(var(--terminal-accent) / 0.2)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-accent) / 0.2), inset 0 0 20px rgb(var(--terminal-accent) / 0.08)',
   },
   CONFIRMED_HACKER: {
-    color: 'rgb(var(--terminal-danger))',
-    ringColor: 'rgb(var(--terminal-danger))',
-    bgGlow: '0 0 80px rgb(var(--terminal-danger) / 0.25)',
-    badgeShadow: '0 0 20px rgb(var(--terminal-danger) / 0.25), inset 0 0 20px rgb(var(--terminal-danger) / 0.1)',
+    color: 'rgb(var(--terminal-accent))',
+    ringColor: 'rgb(var(--terminal-accent))',
+    bgGlow: '0 0 80px rgb(var(--terminal-accent) / 0.25)',
+    badgeShadow: '0 0 20px rgb(var(--terminal-accent) / 0.25), inset 0 0 20px rgb(var(--terminal-accent) / 0.1)',
   },
   UNKNOWN: {
     color: 'rgb(var(--terminal-text))',
@@ -94,7 +94,6 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict, labels }
             )
           })}
         </svg>
-        {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span
             className="font-display text-4xl font-black"
@@ -108,7 +107,6 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, verdict, labels }
         </div>
       </div>
 
-      {/* Verdict badge */}
       <div
         className="px-6 py-2 border font-display text-sm font-bold tracking-widest uppercase"
         style={{
