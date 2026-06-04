@@ -31,7 +31,6 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
   const loginDate = player.last_login_at
     ? new Date(player.last_login_at * 1000).toLocaleString('en-US', {
         timeZone: 'UTC',
-        timeZoneName: 'short',
       })
     : copy.notAvailable
   const scoreAccent = 'rgb(var(--terminal-accent))'
