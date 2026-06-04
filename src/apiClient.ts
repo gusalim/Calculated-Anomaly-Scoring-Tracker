@@ -7,7 +7,7 @@ export interface PlayerResult {
   nickname: string
   verdict: Verdict
   hacker_score: number
-  last_login_at: string | null
+  last_login_at: number | null
 }
 
 export interface ScanResponse {

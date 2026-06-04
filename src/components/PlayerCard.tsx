@@ -29,7 +29,7 @@ const StatBox: React.FC<{ label: string; value: React.ReactNode; accent?: string
 
 export const PlayerCard: React.FC<PlayerCardProps> = ({ player, copy }) => {
   const loginDate = player.last_login_at
-    ? new Date(player.last_login_at).toLocaleString()
+    ? new Date(player.last_login_at * 1000).toLocaleString()
     : copy.notAvailable
   const scoreAccent = 'rgb(var(--terminal-accent))'
   const telemetryRows = [
